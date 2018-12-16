@@ -5,6 +5,8 @@
     "module": "es2015",
     "jsx": "preserve",
     "rootDir": "./src",
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true
   }
 }

@@ -2,7 +2,6 @@ import * as React from "react";
 import { observer } from 'mobx-react'
 import { observable, action, computed } from 'mobx'
 import styled, { keyframes, css, cx } from "react-emotion";
-import { PRIMARY_COLOR, SECONAD_COLOR } from "../../style/variable";
 
 const TYPE_INTERVAL = 80
 const WATI_INTERVAL = 2000
