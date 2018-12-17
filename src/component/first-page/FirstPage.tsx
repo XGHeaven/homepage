@@ -92,6 +92,13 @@ const ContactContainer = styled.div`
   transform: translateZ(30px);
 `
 
+const ContactLink = styled.a`
+  color: white;
+  &:hover {
+    color: lightgray;
+  }
+`
+
 const RedText = styled.span`
   color: ${RED_COLOR};
   text-shadow: 0 16px 8px ${rgb(RED_COLOR).alpha(.3).toString()};
@@ -191,6 +198,12 @@ export default class FirstPage extends React.Component {
             <Contact icon="twitter" primaryColor="#1da1f2" title="Twitter: @XGHeaven" link="https://twitter.com/XGHeaven"/>
             <Contact icon="steam" primaryColor="#000000" title="Steam: @XGHeaven(147460341)" link="https://steamcommunity.com/id/xgheaven/"/>
             <Contact icon="zhihu" primaryColor="#0084ff" title="知乎: @XGHeaven" link="https://www.zhihu.com/people/XGHeaven/activities"/>
+            <Contact family="fas" icon="ellipsis-h" primaryColor="black" title={
+              <div>
+                Others:<br/>
+                <ContactLink href="http://space.bilibili.com/32059373">Bilibili: @XGHeaven</ContactLink>
+              </div>
+            }/>
           </ContactContainer>
         </MainContainer>
       </FullScreen>

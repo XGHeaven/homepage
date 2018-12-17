@@ -27,10 +27,11 @@ export default function Contact(props: {
   title?: React.ReactNode,
   img?: string,
   link?: string,
+  family?: string,
 }) {
 
   const icon = (
-    <i className={cx('fab', 'fa-' + props.icon, baseStyle, css`
+    <i className={cx(props.family || 'fab', 'fa-' + props.icon, baseStyle, css`
       &:hover {
         color: ${props.primaryColor};
         background: white;
