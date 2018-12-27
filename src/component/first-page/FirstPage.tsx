@@ -93,6 +93,7 @@ const ContactContainer = styled.div`
 `
 
 const ContactLink = styled.a`
+  display: block;
   color: white;
   &:hover {
     color: lightgray;
@@ -201,7 +202,8 @@ export default class FirstPage extends React.Component {
             <Contact family="fas" icon="ellipsis-h" primaryColor="black" title={
               <div>
                 Others:<br/>
-                <ContactLink href="http://space.bilibili.com/32059373">Bilibili: @XGHeaven</ContactLink>
+                <ContactLink href="https://space.bilibili.com/32059373">Bilibili: @XGHeaven</ContactLink>
+                <ContactLink href="https://juejin.im/user/580e083912396b00308dae0a">掘金: @XGHeaven</ContactLink>
               </div>
             }/>
           </ContactContainer>
