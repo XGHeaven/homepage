@@ -34,7 +34,10 @@ export default class Footer extends React.Component {
     return (
       <FooterContainer>
         <div>Made&Design with ❤ By XGHeaven, Powered by React/Mobx/Parcel</div>
-        <div>这是我的个人主页，想阅读我的博文，请前往我的 <a href="http://blog.xgheaven.com" target="_blank">Blog</a></div>
+        <div>本主页已
+          <a href="https://github.com/XGHeaven/homepage" target="_blank">开源</a>
+          ，想阅读我的博文，请前往我的 <a href="http://blog.xgheaven.com" target="_blank">Blog</a>
+        </div>
         <div>
           <a href="javascript:void 0;" onClick={this.friendLinkClick}>友情链接</a>
         </div>
