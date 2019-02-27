@@ -46,6 +46,9 @@ export default class Footer extends React.Component {
           <FriendLinkGroup>
             <FriendLink name="Sen Mu's Personal Website" author="Senevan" link="http://blog.senevan.com/"/>
             <FriendLink name="CodeSky 代码之空" author="敖天羽" link="https://www.codesky.me"/>
+            <FriendLink name="Calpa's Blog" author="Calpa" link="https://calpa.me"/>
+            <FriendLink name="Mayne's Blog" author="Mayne" link="https://gine.me"/>
+            <FriendLink name="Ahonn's Blog" author="Ahonn" link="https://www.ahonn.me"/>
           </FriendLinkGroup>
         </SiderDrawer>
       </FooterContainer>
