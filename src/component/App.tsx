@@ -6,10 +6,7 @@ import { STAGE_COLOR_1, STAGE_COLOR_2, STAGE_COLOR_3, STAGE_COLOR_4 } from "../s
 import AboutMe from "./stage/AboutMe";
 import MyProject from "./stage/MyProject";
 
-import stageImageDota2 from '../asset/image/dota2.png'
-import stageImageMine from '../asset/image/mine.jpg'
 import stageImageOpensource from '../asset/image/project.jpg'
-import stageImageTools from '../asset/image/tools.jpg'
 import MyGame from "./stage/MyGame";
 import MyTools from "./stage/MyTools";
 
@@ -21,7 +18,7 @@ export default function App() {
         direction="right"
         title="开源"
         primaryColor={STAGE_COLOR_1}
-        bgImage={stageImageOpensource}
+        bgImage="//wx1.sinaimg.cn/mw690/dfc8f9cdly1g21ievmvpgj21hc0tynag.jpg"
       >
         <MyProject/>
       </Stage>
@@ -29,7 +26,7 @@ export default function App() {
         direction="left"
         title="工具"
         primaryColor={STAGE_COLOR_2}
-        bgImage={stageImageTools}
+        bgImage="//wx4.sinaimg.cn/mw690/dfc8f9cdly1g21ifu8zloj21dl0u00ye.jpg"
       >
         <MyTools/>
       </Stage>
@@ -37,7 +34,7 @@ export default function App() {
         direction="right"
         title="娱乐"
         primaryColor={STAGE_COLOR_3}
-        bgImage={stageImageDota2}
+        bgImage="//wx3.sinaimg.cn/large/dfc8f9cdly1g21ien6yecj20u00izwna.jpg"
       >
         <MyGame/>
       </Stage>
@@ -45,7 +42,7 @@ export default function App() {
         direction="left"
         title="我"
         primaryColor={STAGE_COLOR_4}
-        bgImage={stageImageMine}
+        bgImage="//wx2.sinaimg.cn/large/dfc8f9cdly1g21iercqgij20wi0ia0yh.jpg"
       >
         <AboutMe/>
       </Stage>

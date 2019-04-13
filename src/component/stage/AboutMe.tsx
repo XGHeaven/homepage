@@ -21,7 +21,7 @@ const Poetry = styled.code`
 export default function AboutMe() {
   return (
     <AboutMeContainer>
-      <p>我，XGHeaven，徐田洋，是一个前端、Noder，向往着全栈。2018 年毕业，现就职于杭州网易，一个专业吹水打杂、业余写代码的闲人。</p>
+      <p>我，XGHeaven，徐田洋，是一个前端、Noder，向往着全栈。2018 年毕业，现就职于杭州字节跳动团队，一个专业吹水的人。</p>
       <p>1996 年，我出生在一个又爱又恨的大山东潍坊，虽然自己从小生活在市中心，但是过的却和农村一样，准确说思想上和农村一样。</p>
       <p>
         陪伴度过我学习时代的只有那一台 <b>512M</b> 内存的电脑。

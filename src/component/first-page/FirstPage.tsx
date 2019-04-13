@@ -4,8 +4,6 @@ import { PRIMARY_COLOR, RED_COLOR, GREEN_COLOR, BLUE_COLOR } from '../../style/v
 import CarouselText from '../common/CarouselText';
 import { throttle, clamp } from 'lodash-es'
 
-import avatar from '../../asset/image/avatar.jpg'
-import backgroundImage from '../../asset/image/background.png'
 import BarMenu from '../common/BarMenu';
 import Contact from '../common/Contact';
 import { rgb } from 'color';
@@ -14,7 +12,7 @@ const FullScreen = styled.div`
   width: 100vw;
   height: 100vh;
   background: ${PRIMARY_COLOR};
-  background-image: url(${backgroundImage});
+  background-image: url(//wx3.sinaimg.cn/large/dfc8f9cdly1g21ieidknsj20zk0k0kd2.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -190,7 +188,7 @@ export default class FirstPage extends React.Component {
             I'm A
             <CarouselText/>
           </SubTitle>
-          <Avatar src={avatar}/>
+          <Avatar src="//wx1.sinaimg.cn/mw690/dfc8f9cdly1g21ied63ksj20dw0dw424.jpg"/>
           <ContactContainer>
             <Contact icon="github" primaryColor="#333" title="Github: @XGHeaven" link="https://github.com/XGHeaven"/>
             <Contact icon="weibo" primaryColor="#D43437" title="微博: @XGHeaven" link="https://weibo.com/xgheaven"/>
