@@ -188,7 +188,7 @@ export default class FirstPage extends React.Component {
             I'm A
             <CarouselText/>
           </SubTitle>
-          <Avatar src="//wx1.sinaimg.cn/mw690/dfc8f9cdly1g21ied63ksj20dw0dw424.jpg"/>
+          <Avatar src="//s2.ax1x.com/2019/08/28/moJm4J.jpg"/>
           <ContactContainer>
             <Contact icon="github" primaryColor="#333" title="Github: @XGHeaven" link="https://github.com/XGHeaven"/>
             <Contact icon="weibo" primaryColor="#D43437" title="微博: @XGHeaven" link="https://weibo.com/xgheaven"/>
