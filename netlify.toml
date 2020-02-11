@@ -1,9 +1,4 @@
 [[headers]]
-  for = "*.js"
-  [headers.value]
-    cache-control = "public, max-age=86400"
-
-[[headers]]
-  for = "*.css"
-  [headers.value]
+  for = "*"
+  [headers.values]
     cache-control = "public, max-age=86400"
