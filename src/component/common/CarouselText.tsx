@@ -16,20 +16,6 @@ const cursorBlinkKeyframes = keyframes`
   }
 `
 
-const textAddedKeyframes = keyframes`
-  from, to {
-    /* font-size: 1em; */
-    transform: translateY(0) scaleY(1);
-    color: inherit;
-  }
-
-  50% {
-    /* font-size: 1.5em; */
-    transform: translateY(-4px) scaleY(1.4);
-    color: gray;
-  }
-`
-
 const TypeArea = styled.pre`
   border-right: 2px solid gray;
   padding-left: 0.5em;
@@ -41,7 +27,6 @@ const TypeArea = styled.pre`
 
 const SingleText = styled.pre`
   display: inline-block;
-  animation: ${textAddedKeyframes} .5s ease-in-out 1;
 `
 
 const Cursor = styled.span`

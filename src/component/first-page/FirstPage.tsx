@@ -9,7 +9,7 @@ import Contact from '../common/Contact';
 import { rgb } from 'color';
 
 const FullScreen = styled.div`
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   background: ${PRIMARY_COLOR};
   background-image: url(//wx3.sinaimg.cn/large/dfc8f9cdly1g21ieidknsj20zk0k0kd2.jpg);
@@ -183,7 +183,7 @@ export default class FirstPage extends React.Component {
           <BarMenu>NEXT</BarMenu>
         </LeftBar>
         <MainContainer innerRef={ref => this.ref = ref}>
-          <MainTitle>WELCOME TO <RedText>X</RedText> <GreenText>G</GreenText>AME <BlueText>H</BlueText>EAVEN</MainTitle>
+          <MainTitle>HERE IS <RedText>X</RedText> <GreenText>G</GreenText>AME <BlueText>H</BlueText>EAVEN</MainTitle>
           <SubTitle>
             I'm A
             <CarouselText/>
