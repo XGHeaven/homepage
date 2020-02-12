@@ -40,6 +40,10 @@ export default class Footer extends React.Component {
         </div>
         <div>
           <a href="javascript:void 0;" onClick={this.friendLinkClick}>友情链接</a>
+          &nbsp;
+          |
+          &nbsp;
+          <a href="http://www.beian.miit.gov.cn/">浙ICP备15045223号</a>
         </div>
         <SiderDrawer open={this.friendLinkOpen} onClose={this.friendLinkClose}>
           <h3>友情链接</h3>
