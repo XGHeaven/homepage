@@ -11,4 +11,12 @@ html, body {
   margin: 0;
   padding: 0;
 }
+
+a {
+  color: #333333;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
 `

@@ -10,6 +10,7 @@ const FooterContainer = styled.div`
   text-align: center;
   padding: 20px 0;
   font-size: 12px;
+  line-height: 1.5;
 `
 
 const FriendLinkGroup = styled.ul`
@@ -33,7 +34,7 @@ export default class Footer extends React.Component {
   render() {
     return (
       <FooterContainer>
-        <div>Made&Design with ❤ By XGHeaven, Powered by React/Mobx/Parcel</div>
+        <div>Made&Design with ❤ By Myself</div>
         <div>本主页已
           <a href="https://github.com/XGHeaven/homepage" target="_blank">开源</a>
           ，想阅读我的博文，请前往我的 <a href="http://blog.xgheaven.com" target="_blank">Blog</a>
@@ -45,6 +46,7 @@ export default class Footer extends React.Component {
           &nbsp;
           <a href="http://www.beian.miit.gov.cn/">浙ICP备15045223号</a>
         </div>
+        <div>Powered by React/Mobx/Parcel</div>
         <SiderDrawer open={this.friendLinkOpen} onClose={this.friendLinkClose}>
           <h3>友情链接</h3>
           <FriendLinkGroup>
