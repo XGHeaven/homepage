@@ -1,5 +1,7 @@
 import './style/global';
 
+import './gtag'
+
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 

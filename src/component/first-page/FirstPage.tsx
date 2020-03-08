@@ -3,16 +3,18 @@ import styled from 'react-emotion';
 import { PRIMARY_COLOR, RED_COLOR, GREEN_COLOR, BLUE_COLOR } from '../../style/variable'
 import CarouselText from '../common/CarouselText';
 import { throttle, clamp } from 'lodash-es'
-
 import BarMenu from '../common/BarMenu';
 import Contact from '../common/Contact';
 import { rgb } from 'color';
+
+import AvatarImg from '../../asset/image/avatar.jpg'
+import BackgroundImg from '../../asset/image/background.jpg'
 
 const FullScreen = styled.div`
   width: 100%;
   height: 100vh;
   background: ${PRIMARY_COLOR};
-  background-image: url(//wx3.sinaimg.cn/large/dfc8f9cdly1g21ieidknsj20zk0k0kd2.jpg);
+  background-image: url("${BackgroundImg}");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -30,6 +32,8 @@ const MainTitle = styled.div`
   text-align: center;
   transform: translateZ(80px);
   text-shadow: 0 16px 8px rgba(0, 0, 0, .5);
+  font-family: cursive;
+  font-weight: bold;
 
   @media (max-width: 768px) {
     font-size: 10vw;
@@ -41,6 +45,7 @@ const SubTitle = styled.div`
   font-size: 32px;
   text-align: center;
   transform: translateZ(30px);
+  font-family: cursive;
 
   @media (max-width: 768px) {
     font-size: 5vw;
@@ -188,7 +193,7 @@ export default class FirstPage extends React.Component {
             I'm A
             <CarouselText/>
           </SubTitle>
-          <Avatar src="//s2.ax1x.com/2019/08/28/moJm4J.jpg"/>
+          <Avatar src={AvatarImg}/>
           <ContactContainer>
             <Contact icon="github" primaryColor="#333" title="Github: @XGHeaven" link="https://github.com/XGHeaven"/>
             <Contact icon="weibo" primaryColor="#D43437" title="微博: @XGHeaven" link="https://weibo.com/xgheaven"/>
@@ -197,10 +202,10 @@ export default class FirstPage extends React.Component {
             <Contact icon="twitter" primaryColor="#1da1f2" title="Twitter: @XGHeaven" link="https://twitter.com/XGHeaven"/>
             <Contact icon="steam" primaryColor="#000000" title="Steam: @XGHeaven(147460341)" link="https://steamcommunity.com/id/xgheaven/"/>
             <Contact icon="zhihu" primaryColor="#0084ff" title="知乎: @XGHeaven" link="https://www.zhihu.com/people/XGHeaven/activities"/>
-            <Contact family="fas" icon="ellipsis-h" primaryColor="black" title={
+            <Contact icon="bilibili" primaryColor="#eb7b99" title="Bilibili: @XGHeaven" link="https://space.bilibili.com/32059373"/>
+            <Contact icon="more" primaryColor="black" title={
               <div>
                 Others:<br/>
-                <ContactLink href="https://space.bilibili.com/32059373">Bilibili: @XGHeaven</ContactLink>
                 <ContactLink href="https://juejin.im/user/580e083912396b00308dae0a">掘金: @XGHeaven</ContactLink>
               </div>
             }/>

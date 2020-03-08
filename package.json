@@ -12,7 +12,6 @@
   "author": "XGHeaven",
   "license": "MIT",
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.12.1",
     "color": "^3.1.2",
     "emotion": "^9.2.12",
     "lodash-es": "^4.17.15",

@@ -5,9 +5,13 @@ import Footer from "./footer/Footer";
 import { STAGE_COLOR_1, STAGE_COLOR_2, STAGE_COLOR_3, STAGE_COLOR_4 } from "../style/variable";
 import AboutMe from "./stage/AboutMe";
 import MyProject from "./stage/MyProject";
-
 import MyGame from "./stage/MyGame";
 import MyTools from "./stage/MyTools";
+
+import Stage1 from '../asset/image/project.jpg'
+import Stage2 from '../asset/image/tools.jpg'
+import Stage3 from '../asset/image/dota2.jpg'
+import Stage4 from '../asset/image/mine.jpg'
 
 export default function App() {
   return (
@@ -17,7 +21,7 @@ export default function App() {
         direction="right"
         title="开源"
         primaryColor={STAGE_COLOR_1}
-        bgImage="//s2.ax1x.com/2019/08/28/moJeN4.jpg"
+        bgImage={Stage1}
       >
         <MyProject/>
       </Stage>
@@ -25,7 +29,7 @@ export default function App() {
         direction="left"
         title="工具"
         primaryColor={STAGE_COLOR_2}
-        bgImage="//s2.ax1x.com/2019/08/28/moJQjx.jpg"
+        bgImage={Stage2}
       >
         <MyTools/>
       </Stage>
@@ -33,7 +37,7 @@ export default function App() {
         direction="right"
         title="娱乐"
         primaryColor={STAGE_COLOR_3}
-        bgImage="//s2.ax1x.com/2019/08/28/moJK3R.png"
+        bgImage={Stage3}
       >
         <MyGame/>
       </Stage>
@@ -41,7 +45,7 @@ export default function App() {
         direction="left"
         title="我"
         primaryColor={STAGE_COLOR_4}
-        bgImage="//s2.ax1x.com/2019/08/28/moJuC9.jpg"
+        bgImage={Stage4}
       >
         <AboutMe/>
       </Stage>

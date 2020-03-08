@@ -4,6 +4,7 @@ import { SECONAD_COLOR } from "../../style/variable";
 import Tooltip from 'rc-tooltip';
 import 'rc-tooltip/assets/bootstrap.css'
 import styled from 'react-emotion';
+import { Icon } from '../../icon';
 
 const baseStyle = css`
   color: ${SECONAD_COLOR};
@@ -15,6 +16,7 @@ const baseStyle = css`
   border-top-right-radius: 4px;
   border: 1px solid transparent;
   margin: 0 4px;
+  line-height: 1;
 `
 
 const Link = styled.a`
@@ -27,17 +29,18 @@ export default function Contact(props: {
   title?: React.ReactNode,
   img?: string,
   link?: string,
-  family?: string,
 }) {
 
   const icon = (
-    <i className={cx(props.family || 'fab', 'fa-' + props.icon, baseStyle, css`
-      &:hover {
-        color: ${props.primaryColor};
-        background: white;
-        transform: scale(1.3) translateY(-5px);
-      }
-    `)} />
+    <span className={cx(baseStyle, css`
+    &:hover {
+      color: ${props.primaryColor};
+      background: white;
+      transform: scale(1.3) translateY(-5px);
+    }
+  `)}>
+<Icon type={props.icon}/>
+    </span>
   )
 
   const overlay = (

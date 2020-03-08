@@ -27,6 +27,7 @@ const TypeArea = styled.pre`
 
 const SingleText = styled.pre`
   display: inline-block;
+  font-family: cursive;
 `
 
 const Cursor = styled.span`
