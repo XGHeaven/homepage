@@ -5,6 +5,7 @@ html, body {
   -webkit-font-smoothing: antialiased;
   font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, Tahoma, PingFang SC,
     Microsoft Yahei, Arial, Hiragino Sans GB, sans-serif;
+  filter: grayscale(1);
 }
 * {
   box-sizing: border-box;

@@ -1,14 +1,15 @@
 import * as React from 'react';
-import styled from 'react-emotion';
+import styled, { css } from 'react-emotion';
 import { PRIMARY_COLOR, RED_COLOR, GREEN_COLOR, BLUE_COLOR } from '../../style/variable'
 import CarouselText from '../common/CarouselText';
 import { throttle, clamp } from 'lodash-es'
-import BarMenu from '../common/BarMenu';
+import BarMenu from '../common/NavMenuItem';
 import Contact from '../common/Contact';
 import { rgb } from 'color';
 
 import AvatarImg from '../../asset/image/avatar.jpg'
 import BackgroundImg from '../../asset/image/background.jpg'
+import { NavMenu } from '../common/NavMenu';
 
 const FullScreen = styled.div`
   width: 100%;
@@ -20,10 +21,7 @@ const FullScreen = styled.div`
   background-position: center;
   background-blend-mode: difference;
   display: flex;
-  flex-direction: row;
-  @media (max-width: 576px) {
-    flex-direction: column;
-  }
+  flex-direction: column;
 `
 
 const MainTitle = styled.div`
@@ -34,6 +32,7 @@ const MainTitle = styled.div`
   text-shadow: 0 16px 8px rgba(0, 0, 0, .5);
   font-family: cursive;
   font-weight: bold;
+  padding: 0 16px;
 
   @media (max-width: 768px) {
     font-size: 10vw;
@@ -53,20 +52,14 @@ const SubTitle = styled.div`
   }
 `
 
-const LeftBar = styled.div`
-  @media (max-width: 576px) {
-    height: 64px;
-  }
-  @media not all and (max-width: 576px) {
-    width: 128px;
-  }
+const NavBar = styled.div`
+  width: 100%;
   flex: none;
   display: flex;
-  flex-direction: column;
-
-  @media (max-width: 576px) {
-    flex-direction: row;
-  }
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  height: 48px;
 `
 
 const MainContainer = styled.div`
@@ -183,10 +176,13 @@ export default class FirstPage extends React.Component {
   render() {
     return (
       <FullScreen onMouseMove={this.onMouseMove}>
-        <LeftBar>
-          <BarMenu href="http://blog.xgheaven.com">BLOG</BarMenu>
-          <BarMenu>NEXT</BarMenu>
-        </LeftBar>
+        <NavBar>
+          <div className={css`color: gray; padding: 0 16px;`}>深切悼念抗疫一线牺牲的英雄</div>
+          <NavMenu>
+            <BarMenu href="http://blog.xgheaven.com">BLOG</BarMenu>
+            {/* <BarMenu>ABOUT</BarMenu> */}
+          </NavMenu>
+        </NavBar>
         <MainContainer innerRef={ref => this.ref = ref}>
           <MainTitle>HERE IS <RedText>X</RedText> <GreenText>G</GreenText>AME <BlueText>H</BlueText>EAVEN</MainTitle>
           <SubTitle>
