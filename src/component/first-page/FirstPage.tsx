@@ -60,6 +60,17 @@ const NavBar = styled.div`
   align-items: center;
   justify-content: space-between;
   height: 48px;
+  line-height: 48px;
+`
+
+const RIP = styled.div`
+  color: white;
+  padding: 0 16px;
+  line-height: 48px;
+  background-color: rgba(0, 0, 0, .5);
+  backdrop-filter: blur(8px);
+  border-top-right-radius: 24px;
+  border-bottom-right-radius: 24px;
 `
 
 const MainContainer = styled.div`
@@ -177,7 +188,7 @@ export default class FirstPage extends React.Component {
     return (
       <FullScreen onMouseMove={this.onMouseMove}>
         <NavBar>
-          <div className={css`color: gray; padding: 0 16px;`}>深切悼念抗疫一线牺牲的英雄</div>
+          <RIP>深切悼念抗疫一线牺牲的英雄</RIP>
           <NavMenu>
             <BarMenu href="http://blog.xgheaven.com">BLOG</BarMenu>
             {/* <BarMenu>ABOUT</BarMenu> */}
