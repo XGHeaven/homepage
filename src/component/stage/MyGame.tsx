@@ -1,9 +1,5 @@
-import * as React from 'react'
+import * as React from "react";
 
 export default function MyGame(props) {
-  return (
-    <div>
-      // TODO:
-    </div>
-  )
+  return <div>// TODO:</div>;
 }

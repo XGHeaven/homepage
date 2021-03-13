@@ -1,10 +1,18 @@
-import './style/global';
+import '@emotion/react/types/css-prop'
 
-import './gtag'
+import "./gtag";
 
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import * as React from "react";
+import * as ReactDOM from "react-dom";
 
-import App from './component/App';
+import App from "./component/App";
+import { Global } from "@emotion/react";
+import { globalStyle } from "./style/global";
 
-ReactDOM.render(<App/>, document.getElementById('app'))
+ReactDOM.render(
+  <React.Fragment>
+    <Global styles={globalStyle} />
+    <App />
+  </React.Fragment>,
+  document.getElementById("app")
+);

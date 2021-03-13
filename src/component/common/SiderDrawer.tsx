@@ -1,6 +1,6 @@
 import * as React from "react";
-import { CSSTransition } from 'react-transition-group'
-import styled, { css } from "react-emotion";
+import { CSSTransition } from "react-transition-group";
+import { css } from "@emotion/react";
 import ReactDOM from "react-dom";
 import { rgb } from "color";
 import { PRIMARY_COLOR, SECONAD_COLOR } from "../../style/variable";
@@ -12,9 +12,9 @@ const drawerContainerStyle = css`
   left: 0;
   height: 100%;
   width: 100%;
-  background: rgba(0, 0, 0, .5);
-  transition: all .5s ease-in-out;
-`
+  background: rgba(0, 0, 0, 0.5);
+  transition: all 0.5s ease-in-out;
+`;
 
 const drawerStyle = css`
   position: absolute;
@@ -25,12 +25,12 @@ const drawerStyle = css`
   overflow-x: hidden;
   overflow-y: auto;
   background: white;
-  transition: all .5s ease-in-out;
+  transition: all 0.5s ease-in-out;
   border-radius: 16px;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
   padding: 16px 16px;
-  box-shadow: 0 0 16px ${rgb(SECONAD_COLOR).alpha(.5).toString()};
+  box-shadow: 0 0 16px ${rgb(SECONAD_COLOR).alpha(0.5).toString()};
 
   @media (max-width: 576px) {
     width: 100%;
@@ -38,7 +38,7 @@ const drawerStyle = css`
     border-top-left-radius: 16px;
     border-bottom-right-radius: 0;
   }
-`
+`;
 
 const enterStyle = css`
   .${drawerStyle} {
@@ -50,7 +50,7 @@ const enterStyle = css`
     }
   }
   background: rgba(0, 0, 0, 0);
-`
+`;
 
 const enterActiveStyle = css`
   .${drawerStyle} {
@@ -61,59 +61,59 @@ const enterActiveStyle = css`
       transform: translateY(0);
     }
   }
-  background: rgba(0, 0, 0, .5);
-`
+  background: rgba(0, 0, 0, 0.5);
+`;
 
 const exitStyle = css`
   ${enterActiveStyle};
-`
+`;
 
 const exitActiveStyle = css`
   ${enterStyle};
-`
+`;
 
 export default class SiderDrawer extends React.Component<{
-  open: boolean,
-  onClose?: () => void,
+  open: boolean;
+  onClose?: () => void;
 }> {
-  $el: HTMLDivElement
-  drawerRef = React.createRef<HTMLDivElement>()
+  $el: HTMLDivElement;
+  drawerRef = React.createRef<HTMLDivElement>();
 
   constructor(props) {
-    super(props)
-    const $el = this.$el = document.createElement('div')
-    $el.style.position = 'absolute'
-    $el.style.width = '100%'
-    $el.style.top = '0'
-    document.body.appendChild($el)
+    super(props);
+    const $el = (this.$el = document.createElement("div"));
+    $el.style.position = "absolute";
+    $el.style.width = "100%";
+    $el.style.top = "0";
+    document.body.appendChild($el);
   }
 
   componentWillUnmount() {
-    document.body.removeChild(this.$el)
+    document.body.removeChild(this.$el);
   }
 
   fireClose = (e: React.MouseEvent<HTMLDivElement>) => {
-    const target: HTMLDivElement = e.target as any
+    const target: HTMLDivElement = e.target as any;
     if (contains(this.drawerRef.current, target)) {
-      return
+      return;
     }
-    this.props.onClose && this.props.onClose()
-  }
+    this.props.onClose && this.props.onClose();
+  };
 
   updateBodyOverflow() {
     if (this.props.open) {
-      document.body.style.overflow = 'hidden'
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = null
+      document.body.style.overflow = "";
     }
   }
 
   renderDrawer() {
-    this.updateBodyOverflow()
+    this.updateBodyOverflow();
     return (
       <CSSTransition
         in={this.props.open}
-        classNames={{
+        css={{
           enter: enterStyle,
           enterActive: enterActiveStyle,
           exit: exitStyle,
@@ -128,12 +128,11 @@ export default class SiderDrawer extends React.Component<{
           </div>
         </div>
       </CSSTransition>
-    )
+    );
   }
 
   render() {
-    return ReactDOM.createPortal((
-      <div>{this.renderDrawer()}</div>
-    ), this.$el)
+    return ReactDOM.createPortal(<div>{this.renderDrawer()}</div>, this.$el);
   }
+
 }

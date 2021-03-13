@@ -1,7 +1,8 @@
 import * as React from "react";
-import styled, { css, keyframes, cx } from "react-emotion";
+import { css, keyframes } from "@emotion/react";
+import styled from "@emotion/styled";
 
-export type ArrowDirection = 'top' | 'bottom' | 'left' | 'right'
+export type ArrowDirection = "top" | "bottom" | "left" | "right";
 
 const ArrowHost = styled.div`
   display: inline-block;
@@ -10,7 +11,7 @@ const ArrowHost = styled.div`
   position: relative;
   transition: all 1s;
   opacity: 0.3;
-`
+`;
 
 const arrowUnitKeyframe = keyframes`
   from, to {
@@ -20,7 +21,7 @@ const arrowUnitKeyframe = keyframes`
   25%, 75% {
     transform: rotate(0)
   }
-`
+`;
 
 const ArrowBase = css`
   position: absolute;
@@ -34,63 +35,79 @@ const ArrowBase = css`
   transform-origin: center;
   border-width: 1px;
   border-style: solid;
-`
+`;
 
 const ArrowLeft = styled.div`
   ${ArrowBase}
   left: 28%;
   transform: rotate(45deg);
-`
+`;
 
 const ArrowRight = styled.div`
   ${ArrowBase}
   right: 28%;
   transform: rotate(-45deg);
-`
+`;
 
 const rotate = {
   top: 0,
   left: 270,
   right: 90,
   bottom: 180,
-}
+};
 
 const rotateStyle = {
-  top: css`transform: rotate(0);`,
-  left: css`transform: rotate(270deg);`,
-  right: css`transform: rotate(90deg);`,
-  bottom: css`transform: rotate(180deg);`,
-}
+  top: css`
+    transform: rotate(0);
+  `,
+  left: css`
+    transform: rotate(270deg);
+  `,
+  right: css`
+    transform: rotate(90deg);
+  `,
+  bottom: css`
+    transform: rotate(180deg);
+  `,
+};
 
 function calcRotate(preDir: ArrowDirection, curDir: ArrowDirection) {
-  return rotate[preDir] + Math.abs(rotate[curDir] - rotate[preDir])
+  return rotate[preDir] + Math.abs(rotate[curDir] - rotate[preDir]);
 }
 
 export default class ArrowLever extends React.Component<{
-  direction: ArrowDirection
-  isDark: boolean
+  direction: ArrowDirection;
+  isDark: boolean;
 }> {
-  deg = 0
-  preDir: ArrowDirection = 'top'
+  deg = 0;
+  preDir: ArrowDirection = "top";
 
   componentDidUpdate(prevProps) {
-    this.preDir = prevProps.direction
+    this.preDir = prevProps.direction;
   }
 
   render() {
-    const { direction, isDark } = this.props
-    const startDeg = rotate[this.preDir]
-    const endDeg = rotate[this.preDir] + Math.abs(rotate[direction] - rotate[this.preDir])
+    const { direction, isDark } = this.props;
+    const startDeg = rotate[this.preDir];
+    const endDeg =
+      rotate[this.preDir] + Math.abs(rotate[direction] - rotate[this.preDir]);
     const commonStyle = css`
-      background: ${isDark ? 'black' : 'white'};
-      border-color: ${isDark ? 'white' : 'black'};
-      box-shadow: 0 0 10px 0 ${isDark ? 'white' : 'black'};
-    `
+      background: ${isDark ? "black" : "white"};
+      border-color: ${isDark ? "white" : "black"};
+      box-shadow: 0 0 10px 0 ${isDark ? "white" : "black"};
+    `;
     return (
-      <ArrowHost className={cx(rotateStyle[direction], css`transform: rotate(${endDeg}deg);`)}>
-        <ArrowLeft className={commonStyle}/>
-        <ArrowRight className={commonStyle}/>
+      <ArrowHost
+        css={[
+          rotateStyle[direction],
+          css`
+            transform: rotate(${endDeg}deg);
+          `,
+        ]}
+      >
+        <ArrowLeft css={commonStyle} />
+        <ArrowRight css={commonStyle} />
       </ArrowHost>
-    )
+    );
   }
 }

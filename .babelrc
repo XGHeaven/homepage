@@ -1,6 +1,13 @@
 {
+  "presets": [
+    [
+      "@babel/preset-react",
+      { "runtime": "automatic", "importSource": "@emotion/react" }
+    ]
+  ],
   "plugins": [
-    ["react-hot-loader/babel"],
-    ["emotion", { "sourceMap": true }]
+    // "react-hot-loader/babel",
+    "transform-inline-environment-variables",
+    "@emotion"
   ]
 }
