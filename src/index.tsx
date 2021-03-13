@@ -1,4 +1,4 @@
-import '@emotion/react/types/css-prop'
+import type {} from '@emotion/react/types/css-prop'
 
 import "./gtag";
 
