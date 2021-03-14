@@ -94,7 +94,7 @@ export default class SiderDrawer extends React.Component<{
 
   fireClose = (e: React.MouseEvent<HTMLDivElement>) => {
     const target: HTMLDivElement = e.target as any;
-    if (contains(this.drawerRef.current, target)) {
+    if (contains(this.drawerRef.current!, target)) {
       return;
     }
     this.props.onClose && this.props.onClose();
@@ -122,8 +122,8 @@ export default class SiderDrawer extends React.Component<{
         timeout={500}
         unmountOnExit={true}
       >
-        <div className={drawerContainerStyle} onClick={this.fireClose}>
-          <div className={drawerStyle} ref={this.drawerRef}>
+        <div css={drawerContainerStyle} onClick={this.fireClose}>
+          <div css={drawerStyle} ref={this.drawerRef}>
             {this.props.children}
           </div>
         </div>
@@ -134,5 +134,4 @@ export default class SiderDrawer extends React.Component<{
   render() {
     return ReactDOM.createPortal(<div>{this.renderDrawer()}</div>, this.$el);
   }
-
 }

@@ -15,6 +15,8 @@ import { rgb } from "color";
 import AvatarImg from "../../asset/image/avatar.jpg";
 import BackgroundImg from "../../asset/image/background.jpg";
 import { NavMenu } from "../common/NavMenu";
+import { inject, observer } from "mobx-react";
+import { GlobalStore } from "../../store/global";
 
 const FullScreen = styled.div`
   width: 100%;
@@ -125,7 +127,11 @@ const BlueText = styled.span`
   text-shadow: 0 16px 8px ${rgb(BLUE_COLOR).alpha(0.3).toString()};
 `;
 
-export default class FirstPage extends React.Component {
+@inject("global")
+@observer
+export default class FirstPage extends React.Component<{
+  global: GlobalStore;
+}> {
   private timer: any;
   private ref!: HTMLDivElement;
   gamma: number = 0;
@@ -203,8 +209,15 @@ export default class FirstPage extends React.Component {
         <NavBar>
           <RIP>深切悼念抗疫一线牺牲的英雄</RIP>
           <NavMenu>
+            {/* TODO: 主题切换 */}
+            <BarMenu
+              onClick={() => {
+                console.log("change");
+              }}
+            >
+              LIGHT
+            </BarMenu>
             <BarMenu href="http://blog.xgheaven.com">BLOG</BarMenu>
-            {/* <BarMenu>ABOUT</BarMenu> */}
           </NavMenu>
         </NavBar>
         <MainContainer ref={(ref) => (this.ref = ref!)}>

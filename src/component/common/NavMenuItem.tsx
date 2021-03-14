@@ -19,17 +19,23 @@ const barMenuStyle = css`
   padding: 0 16px;
 `;
 
-export default function BarMenu(props: {href: string, children: any}) {
-  const { href, children } = props;
+export default function BarMenu(
+  props: React.AnchorHTMLAttributes<HTMLAnchorElement>
+) {
+  const { href, children, ...otherProps } = props;
   const inner = children;
 
   if (href) {
     return (
-      <a href={href} css={barMenuStyle} target="_blank">
+      <a href={href} css={barMenuStyle} target="_blank" {...otherProps}>
         {inner}
       </a>
     );
   } else {
-    return <div css={barMenuStyle}>{inner}</div>;
+    return (
+      <div css={barMenuStyle} {...(otherProps as any)}>
+        {inner}
+      </div>
+    );
   }
 }
