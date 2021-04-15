@@ -8,3 +8,5 @@ export const STAGE_COLOR_1 = "#315659"; // '#9F956C'
 export const STAGE_COLOR_2 = "#2978A0"; //'#CBBF7A'
 export const STAGE_COLOR_3 = "#BCAB79"; //'#F4E87C'
 export const STAGE_COLOR_4 = "#C6E0FF"; //'#EBF38B'
+
+export const PC_WIDTH = 920;

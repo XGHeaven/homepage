@@ -1,6 +1,7 @@
 import * as React from "react";
 import { css } from "@emotion/react";
 import { rgb } from "color";
+import { Link } from "react-router-dom";
 
 function transparentColor(color: string) {
   return rgb(color).alpha(0).toString();
@@ -27,9 +28,9 @@ export default function BarMenu(
 
   if (href) {
     return (
-      <a href={href} css={barMenuStyle} target="_blank" {...otherProps}>
+      <Link to={href} css={barMenuStyle} {...otherProps}>
         {inner}
-      </a>
+      </Link>
     );
   } else {
     return (

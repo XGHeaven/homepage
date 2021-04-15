@@ -1,24 +1,24 @@
 import * as React from "react";
-import FirstPage from "./first-page/FirstPage";
-import Stage from "./stage/Stage";
-import Footer from "./footer/Footer";
+import FirstPage from "../../component/first-page/FirstPage";
+import Stage from "../../component/stage/Stage";
+import Footer from "../../component/footer/Footer";
 import {
   STAGE_COLOR_1,
   STAGE_COLOR_2,
   STAGE_COLOR_3,
   STAGE_COLOR_4,
-} from "../style/variable";
-import AboutMe from "./stage/AboutMe";
-import MyProject from "./stage/MyProject";
-import MyGame from "./stage/MyGame";
-import MyTools from "./stage/MyTools";
+} from "../../style/variable";
+import AboutMe from "../../component/stage/AboutMe";
+import MyProject from "../../component/stage/MyProject";
+import MyGame from "../../component/stage/MyGame";
+import MyTools from "../../component/stage/MyTools";
 
-import Stage1 from "../asset/image/project.jpg";
-import Stage2 from "../asset/image/tools.jpg";
-import Stage3 from "../asset/image/dota2.jpg";
-import Stage4 from "../asset/image/mine.jpg";
+import Stage1 from "../../asset/image/project.jpg";
+import Stage2 from "../../asset/image/tools.jpg";
+import Stage3 from "../../asset/image/dota2.jpg";
+import Stage4 from "../../asset/image/mine.jpg";
 
-export default function App() {
+export function HomePage() {
   return (
     <React.Fragment>
       <FirstPage />
