@@ -35,26 +35,29 @@ const builder = new SanIBuilder({
   await builder.prepareFiles()
   const siteConfigData = await builder.cacheSource(siteConfigSource, null)
   const recentArticlesData = await builder.cacheSource(recentArticlesSource, null)
-  await builder.createPage('/', [siteConfigData, recentArticlesData], {
+  await builder.createPage('/', [], {
+    head: {title: 'XGHeaven Homepage'}
+  })
+  await builder.createPage('/blog/', [siteConfigData, recentArticlesData], {
     head: {title: 'MineLog'}
   })
 
   for (const art of recentArticlesData.data) {
-    await builder.createPage(`/article/${art.slug}/`, [siteConfigData, await builder.cacheSource(articleDetailSource, art.slug)], {
+    await builder.createPage(`/blog/article/${art.slug}/`, [siteConfigData, await builder.cacheSource(articleDetailSource, art.slug)], {
       head: {title: `${art.title} - MineLog`}
     })
   }
 
   {
     const tagsData = await builder.cacheSource(tagsSource, null)
-    await builder.createPage('/tags/', [siteConfigData, tagsData], {
+    await builder.createPage('/blog/tags/', [siteConfigData, tagsData], {
       head: {title: '标签 - MineLog'}
     })
   }
 
   {
     const categoryData = await builder.cacheSource(categoriesSource, null)
-    await builder.createPage('/categories/', [siteConfigData, categoryData], {
+    await builder.createPage('/blog/categories/', [siteConfigData, categoryData], {
       head: {title: '分类 - MingLog'}
     })
   }

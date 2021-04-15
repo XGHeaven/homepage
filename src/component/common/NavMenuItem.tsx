@@ -1,7 +1,7 @@
 import * as React from "react";
 import { css } from "@emotion/react";
 import { rgb } from "color";
-import { Link } from "react-router-dom";
+import { Link, LinkProps } from "react-router-dom";
 
 function transparentColor(color: string) {
   return rgb(color).alpha(0).toString();
@@ -21,14 +21,14 @@ const barMenuStyle = css`
 `;
 
 export default function BarMenu(
-  props: React.AnchorHTMLAttributes<HTMLAnchorElement>
+  props: LinkProps
 ) {
-  const { href, children, ...otherProps } = props;
+  const { to, children, ...otherProps } = props;
   const inner = children;
 
-  if (href) {
+  if (to) {
     return (
-      <Link to={href} css={barMenuStyle} {...otherProps}>
+      <Link to={to} css={barMenuStyle} {...otherProps}>
         {inner}
       </Link>
     );
