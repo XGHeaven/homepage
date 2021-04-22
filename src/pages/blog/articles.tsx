@@ -1,90 +1,62 @@
-import React, { useMemo } from 'react'
-import { useSource } from '../../react'
-import { allArticlesSource } from '../../sources'
-import { SimplifyArticle } from '../../types'
-import styled from '@emotion/styled'
-import { setMonth, format } from 'date-fns'
-import { LinkButton } from './button'
-import { ContentContainer } from './layout'
-import { Loading } from '../../component/loading'
+import React, { Fragment } from "react";
+import { articlePage } from "../../sources";
+import { useSource } from "../../react";
+import { ArticleCard } from "./article-card";
+import { ContentContainer } from "./layout";
+import { Loading } from "../../component/loading";
+import styled from "@emotion/styled";
+import { LinkButton } from "./button";
+import { useLocation } from "react-router";
 
-type ArchiveArticles = {
-  [year: string]: SimplifyArticle[][]
-}
-
-const Block = styled.div`
+const BottomPagination = styled.div`
+  text-align: center;
   color: #5d686f;
-`
+`;
 
-const BlockContent = styled.div`
-  padding-left: 40px;
-`
-
-const BlockTitle = styled.div`
-  font-size: 18px;
-  font-weight: 700;
-  margin-top: 16px;
-  margin-bottom: 8px;
-`
-
-const BlockArticles = styled.ul`
-  padding: 0;
-`
-
-const BlockArticle = styled.li`
-  padding: 4px 0;
-`
+const PaginationButton = styled(LinkButton)`
+  margin: 0 8px;
+`;
 
 export function ArticlesPage() {
-  const [articles, loading, error] = useSource(allArticlesSource, null)
-  const sorted = useMemo<ArchiveArticles>(() => {
-    if (!articles) {
-      return {}
-    }
+  // const [articles, loading, error] = useSource(recentArticlesSource, null)
+  const { search } = useLocation<{ page?: string }>();
+  const parsed = new URLSearchParams(search);
+  const page = parseInt(parsed.get("page") || "1", 10) || 1;
+  const [pagination, loading, error] = useSource(articlePage, {
+    page: page,
+    pageSize: 10,
+  });
 
-    return articles.reduce<ArchiveArticles>((map, art) => {
-      const date = new Date(art.createTime)
-      const year = date.getFullYear()
-      const month = date.getMonth()
-
-      if (!map[year]) {
-        map[year] = new Array(12).fill(0).map(() => [])
-      }
-
-      map[year][month].push(art)
-      return map
-    }, {})
-  }, [articles])
-  return <ContentContainer>
-    <Loading loading={loading} error={error}>
-    <div>
-        {Object.keys(sorted).sort().reverse().map(year => {
-          return (
-          <Block>
-            <BlockTitle>{year}</BlockTitle>
-            <BlockContent>{sorted[year].map((arts, month) => {
-              if (arts.length === 0) {
-                return null
-              }
-              return (
-                <Block>
-                  <BlockTitle>{format(setMonth(new Date(), month), 'MMMM')}</BlockTitle>
-                  <BlockContent>
-                    <BlockArticles>
-                      {arts.map(art => <BlockArticle>
-                      <LinkButton type="none" to={`/article/${art.slug}`}>{art.title}</LinkButton>
-                      &nbsp;&nbsp;
-                      {format(art.createTime, 'MMMM dd')}
-                      </BlockArticle>)}
-                    </BlockArticles>
-                    </BlockContent>
-                </Block>
-              )
-            })}</BlockContent>
-          </Block>
-          )
-        })}
-      </div>
-    </Loading>
-  </ContentContainer>
+  return (
+    <ContentContainer>
+      <Loading loading={loading} error={error}>
+        {pagination && (
+          <Fragment>
+            <div>
+              {pagination.nodes.map((article) => (
+                <ArticleCard article={article} />
+              ))}
+            </div>
+            <BottomPagination>
+              <PaginationButton
+                to={`./?page=${page - 1}`}
+                style={{ visibility: page === 1 ? "hidden" : "visible" }}
+              >
+                Prev
+              </PaginationButton>
+              {page} / {Math.ceil(pagination.totalCount / 10)}
+              <PaginationButton
+                to={`./?page=${page + 1}`}
+                style={{
+                  visibility: !pagination.hasNextPage ? "hidden" : "visible",
+                }}
+              >
+                Next
+              </PaginationButton>
+            </BottomPagination>
+          </Fragment>
+        )}
+      </Loading>
+    </ContentContainer>
+  );
 }

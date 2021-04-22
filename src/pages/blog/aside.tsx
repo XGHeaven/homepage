@@ -1,9 +1,9 @@
-import React from 'react'
-import styled from '@emotion/styled'
-import { assetURL } from './markdown-render'
-import { Menu } from './menu'
-import { siteConfigSource } from '../../sources'
-import { useSource } from '../../react'
+import React from "react";
+import styled from "@emotion/styled";
+import { assetURL } from "./markdown-render";
+import { Menu } from "./menu";
+import { siteConfigSource } from "../../sources";
+import { useSource } from "../../react";
 
 // const Menu = styled(Link)`
 //   display: inline-block;
@@ -20,47 +20,50 @@ import { useSource } from '../../react'
 //   }
 // `
 
-const Menus = styled.div`
-`
+const Menus = styled.div``;
 
 const MenuBlank = styled.div`
   height: 20px;
-`
+`;
 
 const SideHead = styled.div`
   padding: 40px 0;
   text-align: center;
-`
+`;
 const SideAvatar = styled.img`
   width: 90px;
   height: 90px;
   border-radius: 50%;
-`
+`;
 const SideName = styled.div`
   margin-top: 4px;
   color: white;
-`
+`;
 
 export function Aside() {
-  const [site] = useSource(siteConfigSource, null)
+  const [site] = useSource(siteConfigSource, null);
   return (
     <div>
       <SideHead>
-        <SideAvatar src={site?.avatar && assetURL(site?.avatar)}/>
-        <SideName>
-          XGHeaven
-        </SideName>
+        <SideAvatar src={site?.avatar && assetURL(site?.avatar)} />
+        <SideName>XGHeaven</SideName>
       </SideHead>
       <Menus>
-        <Menu to="/blog/" icon="home">
+        <Menu to="/" icon="home">
           首页
-          </Menu>
-        <Menu to="/blog/categories" icon="category">分类</Menu>
-        <Menu to="/blog/tags" icon="tag">标签</Menu>
-        <Menu to="/blog/articles" icon="article">Articles</Menu>
+        </Menu>
+        <Menu to="/blog/articles" icon="article">
+          文章
+        </Menu>
+        <Menu to="/blog/categories" icon="category">
+          分类
+        </Menu>
+        <Menu to="/blog/tags" icon="tag">
+          标签
+        </Menu>
         {/* <Menu to="/blog/about" icon="">关于</Menu> */}
-        <Menu to="/blog/friend-link" icon="link">Friend link</Menu>
+        {/* <Menu to="/blog/friend-link" icon="link">Friend link</Menu> */}
       </Menus>
     </div>
-  )
+  );
 }

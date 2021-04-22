@@ -13,7 +13,7 @@ const Tags = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   margin-top: 16px;
-`
+`;
 
 const Tag = styled(Link)`
   border: 1px solid #0c78ce;
@@ -23,24 +23,38 @@ const Tag = styled(Link)`
   margin-bottom: 8px;
   background-color: white;
   border-radius: 4px;
-`
+`;
 
 export function TagsPage() {
-  const [tags, loading, error] = useSource(tagsSource, null)
-  const [filter, setFilter] = useState('')
-  const filteredTags = useMemo(() => tags ? tags.filter(tag => tag.name.toLowerCase().includes(filter.toLowerCase())) : [], [tags, filter])
-    return (
-      <ContentContainer>
-        <Loading loading={loading} error={error}>
-        <FilterInput placeholder="搜索标签" onChange={e => setFilter(e.target.value)}/>
+  const [tags, loading, error] = useSource(tagsSource, null);
+  const [filter, setFilter] = useState("");
+  const filteredTags = useMemo(
+    () =>
+      tags
+        ? tags.filter((tag) =>
+            tag.name.toLowerCase().includes(filter.toLowerCase())
+          )
+        : [],
+    [tags, filter]
+  );
+  return (
+    <ContentContainer>
+      <Loading loading={loading} error={error}>
+        <FilterInput
+          placeholder="搜索标签"
+          onChange={(e) => setFilter(e.target.value)}
+        />
         <Tags>
-          {filteredTags.map(tag => (<Tag to={`#${tag.name}`}>{tag.name}</Tag>))}
+          {filteredTags.map((tag) => (
+            <Tag to={`#${tag.name}`}>{tag.name}</Tag>
+          ))}
         </Tags>
         <div>
-          {filteredTags.map(tag => (<ArticleGroup name={tag.name} articles={tag.articles}/>))}
+          {filteredTags.map((tag) => (
+            <ArticleGroup name={tag.name} articles={tag.articles} />
+          ))}
         </div>
-
-        </Loading>
-      </ContentContainer>
-    )
+      </Loading>
+    </ContentContainer>
+  );
 }

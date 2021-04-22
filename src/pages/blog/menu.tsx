@@ -14,11 +14,12 @@ const S_Link = css`
   text-decoration: none;
   padding: 0 24px;
   transition: all 0.3s ease;
-  &:hover, &:active {
+  &:hover,
+  &:active {
     color: white;
-    background-color: rgba(100, 100, 100, .3);
+    background-color: rgba(100, 100, 100, 0.3);
   }
-`
+`;
 
 const IconPart = styled.div`
   display: inline-block;
@@ -26,13 +27,15 @@ const IconPart = styled.div`
   margin-right: 16px;
   width: 32px;
   text-align: center;
-`
+`;
 
-export const Menu: FC<{to: string, icon: string}> = props => {
-  return <Link to={props.to} css={S_Link}>
-    <IconPart>
-    <Icon type={props.icon}/>
-    </IconPart>
-    {props.children}
+export const Menu: FC<{ to: string; icon: string }> = (props) => {
+  return (
+    <Link to={props.to} css={S_Link}>
+      <IconPart>
+        <Icon type={props.icon} />
+      </IconPart>
+      {props.children}
     </Link>
-}
+  );
+};

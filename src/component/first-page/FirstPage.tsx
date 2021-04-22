@@ -217,7 +217,7 @@ export default class FirstPage extends React.Component<{
             >
               LIGHT
             </BarMenu>
-            <BarMenu to="/">BLOG</BarMenu>
+            <BarMenu to="/blog/">BLOG</BarMenu>
           </NavMenu>
         </NavBar>
         <MainContainer ref={(ref) => (this.ref = ref!)}>

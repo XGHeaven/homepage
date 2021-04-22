@@ -7,18 +7,18 @@ import { Article } from "./article.model";
 export class ArticleTagResolver {
   constructor(public tagService: ArticleTagService) {}
 
-  @Query(returns => ArticleTag, {nullable: true})
-  async tag(@Args('tagName') tagName: string) {
-    return this.tagService.getTag(tagName)
+  @Query((returns) => ArticleTag, { nullable: true })
+  async tag(@Args("tagName") tagName: string) {
+    return this.tagService.getTag(tagName);
   }
 
-  @Query(returns => [ArticleTag])
+  @Query((returns) => [ArticleTag])
   async tags() {
-    return this.tagService.getAllTags()
+    return this.tagService.getAllTags();
   }
 
-  @ResolveField('articles', returns => [Article])
+  @ResolveField("articles", (returns) => [Article])
   async tagFieldArticles(@Parent() tag: ArticleTag) {
-    return this.tagService.getTagArticles(tag.name)
+    return this.tagService.getTagArticles(tag.name);
   }
 }

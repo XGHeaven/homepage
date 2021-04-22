@@ -4,8 +4,8 @@ import { Article } from "./article.model";
 @ObjectType()
 export class Category {
   @Field()
-  name!: string
+  name!: string;
 
-  @Field(of => [Article])
-  articles!: Article[]
+  @Field((of) => [Article])
+  articles!: Article[];
 }

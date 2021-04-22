@@ -5,4 +5,4 @@ export const ContentContainer = styled.div`
   width: ${PC_WIDTH}px;
   padding: 0 45px;
   margin: auto;
-`
+`;

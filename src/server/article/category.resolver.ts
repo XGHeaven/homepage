@@ -7,18 +7,18 @@ import { CategoryService } from "./category.service";
 export class CategoryResolver {
   constructor(private categoryService: CategoryService) {}
 
-  @Query(returns => Category, {nullable: true})
-  async category(@Args('name', {nullable: true}) name?: string) {
-    return this.categoryService.getCategory(name)
+  @Query((returns) => Category, { nullable: true })
+  async category(@Args("name", { nullable: true }) name?: string) {
+    return this.categoryService.getCategory(name);
   }
 
-  @Query(returns => [Category])
+  @Query((returns) => [Category])
   async categories() {
-    return this.categoryService.getAllCategory()
+    return this.categoryService.getAllCategory();
   }
 
-  @ResolveField('articles', returns => [Article])
+  @ResolveField("articles", (returns) => [Article])
   async categoryFieldArticles(@Parent() category: Category) {
-    return this.categoryService.getCategoryArticles(category.name)
+    return this.categoryService.getCategoryArticles(category.name);
   }
 }

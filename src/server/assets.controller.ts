@@ -1,22 +1,22 @@
 import { Controller, Get, Req, Res } from "@nestjs/common";
 import { AssetsService } from "./assets.service";
-import { Request, Response } from 'express'
-import * as path from 'path'
+import { Request, Response } from "express";
+import * as path from "path";
 
-@Controller('/assets')
+@Controller("/assets")
 export class AssetsController {
   constructor(private assets: AssetsService) {}
 
-  @Get('/*')
+  @Get("/*")
   async get(@Req() req: Request, @Res() res: Response) {
-    const uri = decodeURI(path.relative('/assets', req.url))
-    console.log(uri)
+    const uri = decodeURI(path.relative("/assets", req.url));
+    console.log(uri);
     if (this.assets.has(uri)) {
-      res.sendFile(this.assets.getFilePath(uri)!)
-      return
+      res.sendFile(this.assets.getFilePath(uri)!);
+      return;
     }
 
-    res.status(404)
-    res.end('404')
+    res.status(404);
+    res.end("404");
   }
 }

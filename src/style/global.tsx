@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { CLink, CLinkHover } from "./color";
-import 'github-markdown-css/github-markdown.css'
+import "github-markdown-css/github-markdown.css";
 
 export const globalStyle = css`
   html,
@@ -20,7 +20,7 @@ export const globalStyle = css`
     color: ${CLink};
     text-decoration: none;
     &:hover {
-      color: ${CLinkHover}
+      color: ${CLinkHover};
     }
   }
 `;

@@ -4,8 +4,8 @@ import { Article } from "./article.model";
 @ObjectType()
 export class ArticleTag {
   @Field()
-  name!: string
+  name!: string;
 
-  @Field(type => [Article])
-  articles!: Article[]
+  @Field((type) => [Article])
+  articles!: Article[];
 }

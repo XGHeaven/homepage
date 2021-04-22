@@ -20,9 +20,7 @@ const barMenuStyle = css`
   padding: 0 16px;
 `;
 
-export default function BarMenu(
-  props: LinkProps
-) {
+export default function BarMenu(props: Partial<LinkProps>) {
   const { to, children, ...otherProps } = props;
   const inner = children;
 

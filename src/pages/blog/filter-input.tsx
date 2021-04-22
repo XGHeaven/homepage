@@ -8,4 +8,4 @@ export const FilterInput = styled.input`
   font-size: 24px;
   width: 100%;
   color: #5d686f;
-`
+`;
