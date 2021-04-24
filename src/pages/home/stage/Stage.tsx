@@ -1,9 +1,9 @@
 import * as React from "react";
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
-import ArrowLever from "../common/ArrowLever";
+import ArrowLever from "../../../component/common/ArrowLever";
 import { rgb } from "color";
-import { pinTopTimeout } from "../../lib/pin-top";
+import { pinTopTimeout } from "../../../lib/pin-top";
 import { resetGlobalState } from "mobx/dist/internal";
 
 export type Direction = "left" | "right";

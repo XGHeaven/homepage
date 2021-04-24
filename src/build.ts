@@ -58,7 +58,7 @@ const builder = new SanIBuilder({
     );
   }
 
-  await builder.createPage("/", [], {
+  await builder.createPage("/", [siteConfigData, recentArticlesData], {
     head: { title: "XGHeaven Homepage" },
   });
   await builder.createPage("/blog/", [siteConfigData], {
