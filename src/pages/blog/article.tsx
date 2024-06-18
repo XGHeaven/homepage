@@ -1,5 +1,5 @@
 import React from "react";
-import { RouteComponentProps, useParams } from "react-router";
+import { useParams } from "react-router";
 import { articleDetailSource } from "../../sources";
 import { useSource } from "../../react";
 import styled from "@emotion/styled";

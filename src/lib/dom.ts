@@ -1,5 +1,5 @@
 export default function contains(root: Node, n: Node) {
-  let node = n;
+  let node: Node | null = n;
   while (node) {
     if (node === root) {
       return true;

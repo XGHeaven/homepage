@@ -1,9 +1,10 @@
-import { Injectable, OnModuleInit } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import path from "path";
 import glob from "glob";
 import * as fs from "fs-extra";
 import remarkParser from "remark-parse";
 import remarkFrontmatter from "remark-frontmatter";
+// @ts-expect-error
 import remarkSlug from "remark-slug";
 import unified, { Processor } from "unified";
 import mdtoc from "mdast-util-toc";
@@ -13,7 +14,6 @@ import YAML from "js-yaml";
 import visit from "unist-util-visit";
 import filter from "unist-util-filter";
 import map from "unist-util-map";
-import { Transformer } from "unified";
 import { Node } from "unist";
 import { ArticleTag } from "./article-tag.model";
 import { Collection } from "../collection";
@@ -75,13 +75,13 @@ export class ArticleService {
       .use(remarkFrontmatter)
       .use(remarkSlug)
       .use(() => {
-        return ((ast: Root, file) => {
+        return ((ast, file) => {
           const article = new Article();
           let frontmatter: any;
 
-          if (ast.children[0]?.type === "yaml") {
+          if ((ast.children as any)[0]?.type === "yaml") {
             article.frontmatter = frontmatter = YAML.load(
-              ast.children[0].value,
+              (ast.children as any)[0].value,
               {
                 json: true,
               }
@@ -137,7 +137,7 @@ export class ArticleService {
           file.data = Object.assign(file.data ?? {}, {
             article,
           });
-        }) as Transformer;
+        });
       })
       .use(function (this: Processor) {
         return (root, file) => {
@@ -198,14 +198,14 @@ export class ArticleService {
         };
       })
       .use(function (this: Processor) {
-        return ((ast: Root, file) => {
+        return ((ast, file) => {
           const toc = mdtoc(ast);
 
           file.data = Object.assign(file.data ?? {}, {
             ast,
             toc,
           });
-        }) as Transformer;
+        });
       })
       .use(function (this: Processor) {
         this.Compiler = (e) => "";
@@ -213,7 +213,7 @@ export class ArticleService {
       .process(content);
 
     const { ast, toc, article } = file.data as {
-      ast: Root;
+      ast: Node;
       toc: mdtoc.TOCResult;
       article: Article;
     };
@@ -246,7 +246,7 @@ export class ArticleService {
     return str.slice(0, maxLength);
   }
 
-  toPureString(ast: Root) {
+  toPureString(ast: Node) {
     const strs: string[] = [];
 
     if (ast) {
