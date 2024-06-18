@@ -15,7 +15,7 @@ const root = process.cwd();
 
 const builder = new SanIBuilder({
   // inputDir: path.join(process.cwd(), 'dist/html'),
-  inputDir: path.join(root, "./dist/html"),
+  inputDir: path.join(root, "./dist/frontend"),
   // outputDir: path.join(process.cwd(), 'public'),
   outputDir: path.join(root, "./public"),
   entryHTML: "index.html",

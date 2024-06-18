@@ -81,3 +81,5 @@ typings/
 # Dist
 dist/
 public/
+
+.parcel-cache/

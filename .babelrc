@@ -8,6 +8,12 @@
   "plugins": [
     // "react-hot-loader/babel",
     "transform-inline-environment-variables",
-    "@emotion"
+    "@emotion",
+    [
+      "@babel/plugin-proposal-decorators",
+      {
+        "version": "legacy"
+      }
+    ]
   ]
 }

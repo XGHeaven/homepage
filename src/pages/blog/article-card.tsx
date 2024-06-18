@@ -31,7 +31,6 @@ const ArticleDescription = styled.div`
 `;
 
 export function ArticleCard({ article }: { article: SimplifyArticle }) {
-  console.log(article);
   return (
     <Container>
       <ArticleTitle to={`/blog/article/${article.slug}`}>

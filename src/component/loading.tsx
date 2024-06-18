@@ -1,6 +1,6 @@
 import { keyframes } from "@emotion/react";
 import styled from "@emotion/styled";
-import { FC, Props, useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 
 const LoadingWrapper = styled.div`
   width: 100%;

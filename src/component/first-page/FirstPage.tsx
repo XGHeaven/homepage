@@ -11,18 +11,22 @@ import { throttle, clamp } from "lodash-es";
 import BarMenu from "../common/NavMenuItem";
 import Contact from "../common/Contact";
 import { rgb } from "color";
-
-import AvatarImg from "../../asset/image/avatar.jpg";
-import BackgroundImg from "../../asset/image/background.jpg";
 import { NavMenu } from "../common/NavMenu";
 import { inject, observer } from "mobx-react";
 import { GlobalStore } from "../../store/global";
+
+const AvatarImgSrc = new URL("../../asset/image/avatar.jpg", import.meta.url)
+  .href;
+const BackgroundImgSrc = new URL(
+  "../../asset/image/background.jpg",
+  import.meta.url
+).href;
 
 const FullScreen = styled.div`
   width: 100%;
   height: 100vh;
   background: ${PRIMARY_COLOR};
-  background-image: url("${BackgroundImg}");
+  background-image: url("${BackgroundImgSrc}");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -206,19 +210,21 @@ export default class FirstPage extends React.Component<{
   render() {
     return (
       <FullScreen onMouseMove={this.onMouseMove}>
-        <NavBar>
-          <RIP>深切悼念抗疫一线牺牲的英雄</RIP>
+        <NavBar className="backdrop-blur bg-gray-900/30">
+          {/* <RIP>深切悼念抗疫一线牺牲的英雄</RIP> */}
           <NavMenu>
             {/* TODO: 主题切换 */}
-            <BarMenu
+            {/* <BarMenu
               onClick={() => {
                 console.log("change");
               }}
             >
               LIGHT
-            </BarMenu>
-            <BarMenu to="/blog/">BLOG</BarMenu>
+            </BarMenu> */}
+            <BarMenu to="/blog/">NEW BLOG(WIP)</BarMenu>
+            <BarMenu to="https://blog.xgheaven.com">OLD BLOG</BarMenu>
           </NavMenu>
+          <div className="flex-auto"></div>
         </NavBar>
         <MainContainer ref={(ref) => (this.ref = ref!)}>
           <MainTitle>
@@ -229,7 +235,7 @@ export default class FirstPage extends React.Component<{
             I'm A
             <CarouselText />
           </SubTitle>
-          <Avatar src={AvatarImg} />
+          <Avatar src={AvatarImgSrc} />
           <ContactContainer>
             <Contact
               icon="github"
@@ -237,12 +243,12 @@ export default class FirstPage extends React.Component<{
               title="Github: @XGHeaven"
               link="https://github.com/XGHeaven"
             />
-            <Contact
+            {/* <Contact
               icon="weibo"
               primaryColor="#D43437"
               title="微博: @XGHeaven"
               link="https://weibo.com/xgheaven"
-            />
+            /> */}
             <Contact
               icon="telegram"
               primaryColor="#0088cc"
@@ -287,6 +293,9 @@ export default class FirstPage extends React.Component<{
                   <br />
                   <ContactLink href="https://juejin.im/user/580e083912396b00308dae0a">
                     掘金: @XGHeaven
+                  </ContactLink>
+                  <ContactLink href="https://weibo.com/xgheaven">
+                    微博: @XGHeaven
                   </ContactLink>
                 </div>
               }

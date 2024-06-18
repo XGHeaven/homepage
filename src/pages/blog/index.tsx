@@ -1,10 +1,6 @@
 import styled from "@emotion/styled";
 import React, { Fragment } from "react";
-import { Switch, Route, Redirect } from "react-router";
-import { ArticlePage } from "./article";
-import { CategoriesPage } from "./categories";
-import { ArticlesPage } from "./articles";
-import { TagsPage } from "./tags";
+import { Outlet } from "react-router";
 import { Aside } from "./aside";
 import { useSource } from "../../react";
 import { siteConfigSource } from "../../sources";
@@ -62,16 +58,10 @@ export function BlogPage() {
       </FixedSide>
       <Body>
         <BodyInner>
-          <Switch>
-            <Route path="/blog/articles/" exact component={ArticlesPage} />
-            <Route path="/blog/article/:slot/" exact component={ArticlePage} />
-            <Route path="/blog/categories/" exact component={CategoriesPage} />
-            <Route path="/blog/tags/" exact component={TagsPage} />
-            <Redirect from="/blog/" to="/blog/articles/" />
-          </Switch>
+          <Outlet />
           <Footer>
             <Copyright>
-              Copyrights © 2021 XGHeaven. All Rights Reserved.
+              Copyrights © 2024 XGHeaven. All Rights Reserved.
             </Copyright>
           </Footer>
         </BodyInner>

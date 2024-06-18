@@ -1,9 +1,14 @@
 import * as React from "react";
 import Project from "../../../component/my-project/Project";
+import { LinkButton } from "../../blog/button";
 
 export default function MyProject() {
   return (
-    <div>
+    <div className="grid grid-cols-1 gap-2 md:grid-cols-3 sm:grid-cols-2">
+      <Project title="jsscript" href="https://github.com/XGHeaven/jsscript">
+        在 JavaScript 上实现的 JavaScript ESNext
+        引擎，具有灵活性、易维护等特点。
+      </Project>
       <Project
         title="MinecraftManager"
         href="https://github.com/XGHeaven/minecraft-manager"
@@ -35,7 +40,6 @@ export default function MyProject() {
       >
         一个评价教师的小脚本，就是在选课开始之前，需要评价教师(已经被移动了，链接在右侧）
       </Project>
-      <div style={{ textAlign: "center" }}>And More to Github</div>
     </div>
   );
 }

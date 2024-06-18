@@ -34,6 +34,7 @@ const SideAvatar = styled.img`
   width: 90px;
   height: 90px;
   border-radius: 50%;
+  margin: auto;
 `;
 const SideName = styled.div`
   margin-top: 4px;

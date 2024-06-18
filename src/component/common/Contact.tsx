@@ -3,7 +3,6 @@ import { SECONAD_COLOR } from "../../style/variable";
 import Tooltip from "rc-tooltip";
 import "rc-tooltip/assets/bootstrap.css";
 import { css } from "@emotion/react";
-import styled from "@emotion/styled";
 import { Icon } from "../../icon";
 
 const baseStyle = css`
@@ -17,10 +16,6 @@ const baseStyle = css`
   border: 1px solid transparent;
   margin: 0 4px;
   line-height: 1;
-`;
-
-const Link = styled.a`
-  display: inline-block;
 `;
 
 export default function Contact(props: {
@@ -57,9 +52,9 @@ export default function Contact(props: {
   return (
     <Tooltip placement="top" overlay={overlay}>
       {props.link ? (
-        <Link href={props.link} target="_blank">
+        <a className="inline-block" href={props.link} target="_blank">
           {icon}
-        </Link>
+        </a>
       ) : (
         icon
       )}

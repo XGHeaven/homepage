@@ -1,5 +1,6 @@
 import { Module, OnModuleInit } from "@nestjs/common";
 import { GraphQLModule } from "@nestjs/graphql";
+import { ApolloDriver, ApolloDriverConfig } from "@nestjs/apollo";
 import { ArticleTagResolver } from "./article/article-tag.resolver";
 import { ArticleTagService } from "./article/article-tag.service";
 import { ArticleResolver } from "./article/article.resolver";
@@ -28,7 +29,8 @@ import { SiteService } from "./site/site.service";
     AssetsResolver,
   ],
   imports: [
-    GraphQLModule.forRoot({
+    GraphQLModule.forRoot<ApolloDriverConfig>({
+      driver: ApolloDriver,
       autoSchemaFile: true,
     }),
   ],

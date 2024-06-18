@@ -1,5 +1,5 @@
 import React from "react";
-import { RouteComponentProps } from "react-router";
+import { RouteComponentProps, useParams } from "react-router";
 import { articleDetailSource } from "../../sources";
 import { useSource } from "../../react";
 import styled from "@emotion/styled";
@@ -22,11 +22,9 @@ const ArticleContent = styled.div`
   color: #5d686f;
 `;
 
-export function ArticlePage(props: RouteComponentProps<{ slot: string }>) {
-  const [article, loading, error] = useSource(
-    articleDetailSource,
-    props.match.params.slot
-  );
+export function ArticlePage() {
+  const { slot } = useParams<{ slot: string }>();
+  const [article, loading, error] = useSource(articleDetailSource, slot);
 
   return (
     <ContentContainer

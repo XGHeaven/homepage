@@ -1,6 +1,6 @@
 import { Controller, Get, Req, Res } from "@nestjs/common";
 import { AssetsService } from "./assets.service";
-import { Request, Response } from "express";
+import type { Request, Response } from "express";
 import * as path from "path";
 
 @Controller("/assets")
