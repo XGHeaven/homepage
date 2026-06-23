@@ -13,10 +13,11 @@ const sani = new SanI({
   sourceKeyMapper: (globalThis as any).__source_data_mapper,
 });
 
-const http = axios.create({
-  // baseURL: 'http://localhost:4999'
-  baseURL: "http://localhost:3000",
-});
+const getHttp = () =>
+  axios.create({
+    // baseURL: 'http://localhost:4999'
+    baseURL: process.env.GRAPHQL_BASE_URL ?? "http://localhost:3000",
+  });
 
 const get = (
   query: string,
@@ -25,7 +26,7 @@ const get = (
     environments?: any;
   } = {}
 ) => {
-  return http
+  return getHttp()
     .post(
       "/graphql",
       {
@@ -71,7 +72,7 @@ export const siteConfigSource = sani.createSource<null, SiteConfig>(
   () => `site-config`,
   {
     async remoteSource() {
-      const { site } = await get(`
+      const data = await get(`
     query {
       site {
         backgroundImage,
@@ -79,7 +80,7 @@ export const siteConfigSource = sani.createSource<null, SiteConfig>(
       }
     }
     `);
-      return site;
+      return data?.site ?? {};
     },
   }
 );
@@ -98,7 +99,7 @@ export const recentArticlesSource = sani.createSource<null, SimplifyArticle[]>(
       }
     }
     `);
-      return data.newestArticles.map(mapSimplifyArticle);
+      return (data?.newestArticles ?? []).map(mapSimplifyArticle);
     },
   }
 );
@@ -111,7 +112,7 @@ export const categoriesSource = sani.createSource<null, TopCategory[]>(
   () => "/categories",
   {
     async remoteSource() {
-      const { categories } = await get(`
+      const data = await get(`
     query {
       categories {
         name,
@@ -123,14 +124,14 @@ export const categoriesSource = sani.createSource<null, TopCategory[]>(
       }
     }
     `);
-      return categories;
+      return data?.categories ?? [];
     },
   }
 );
 
 export const tagsSource = sani.createSource<null, TopTag[]>(() => `/tags`, {
   async remoteSource() {
-    const { tags } = await get(`
+    const data = await get(`
     query {
       tags {
         name,
@@ -142,7 +143,7 @@ export const tagsSource = sani.createSource<null, TopTag[]>(() => `/tags`, {
       }
     }
     `);
-    return tags;
+    return data?.tags ?? [];
     // const {data: rawTags} = await http.get<any[]>(`/?q=${encodeURIComponent(`.models.Tag`)}`)
     // return rawTags.map(tag => ({name: tag.name, id: tag._id}))
   },
@@ -152,7 +153,7 @@ export const articleDetailSource = sani.createSource<string, Article>(
   (slug) => `/article/${slug}`,
   {
     async remoteSource(slug) {
-      const { article } = await get(`
+      const data = await get(`
       query {
         article(slug: "${slug}") {
           title,
@@ -163,6 +164,10 @@ export const articleDetailSource = sani.createSource<string, Article>(
         }
       }
     `);
+      const article = data?.article;
+      if (!article) {
+        throw new Error(`article not found: ${slug}`);
+      }
       // const {data} = await http.get<any>(`/?q=${encodeURIComponent(`.models.Post.filter(a => a.slug === "${slot}")`)}`)
       return transferArticle(article);
     },
@@ -181,7 +186,7 @@ export const articlePage = sani.createSource<
   Pagination<SimplifyArticle>
 >(({ page, pageSize }) => `/articles/${pageSize}/${page}`, {
   async remoteSource({ page, pageSize }) {
-    const { articles } = await get(`
+    const data = await get(`
     query{
       articles(limit: ${pageSize}, offset: ${(page - 1) * pageSize}) {
         totalCount,
@@ -195,18 +200,22 @@ export const articlePage = sani.createSource<
       }
     }
     `);
-
-    articles.nodes = articles.nodes.map(mapSimplifyArticle);
+    const articles = data?.articles ?? {
+      totalCount: 0,
+      hasNextPage: false,
+      nodes: [],
+    };
+    articles.nodes = (articles.nodes ?? []).map(mapSimplifyArticle);
     return articles;
   },
 });
 
 export const assetsSource = sani.createSource<null, string[]>(() => `/assets`, {
   async remoteSource() {
-    const { assets } = await get(`
+    const data = await get(`
     query {
       assets
     }`);
-    return assets;
+    return data?.assets ?? [];
   },
 });

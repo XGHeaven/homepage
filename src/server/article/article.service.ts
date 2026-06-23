@@ -4,7 +4,6 @@ import glob from "glob";
 import * as fs from "fs-extra";
 import remarkParser from "remark-parse";
 import remarkFrontmatter from "remark-frontmatter";
-// @ts-expect-error
 import remarkSlug from "remark-slug";
 import unified, { Processor } from "unified";
 import mdtoc from "mdast-util-toc";
@@ -18,6 +17,15 @@ import { Node } from "unist";
 import { ArticleTag } from "./article-tag.model";
 import { Collection } from "../collection";
 import { AssetsService } from "../assets.service";
+
+type TreeNode = Node & {
+  value?: string;
+  children?: TreeNode[];
+};
+
+type SerializedTreeNode = Omit<TreeNode, "position" | "children"> & {
+  children?: SerializedTreeNode[];
+};
 
 @Injectable()
 export class ArticleService {
@@ -78,10 +86,12 @@ export class ArticleService {
         return ((ast, file) => {
           const article = new Article();
           let frontmatter: any;
+          const root = ast as Root;
+          const firstChild = root.children[0] as TreeNode | undefined;
 
-          if ((ast.children as any)[0]?.type === "yaml") {
+          if (firstChild?.type === "yaml") {
             article.frontmatter = frontmatter = YAML.load(
-              (ast.children as any)[0].value,
+              firstChild.value ?? "",
               {
                 json: true,
               }
@@ -96,11 +106,7 @@ export class ArticleService {
           article.slug = slug;
 
           const title =
-            article.frontmatter.title ||
-            this.toPureString(
-              (toc.map?.children?.[0]?.children?.[0]?.children as any)?.[0]
-            ) ||
-            `${slug}(Untitled)`;
+            article.frontmatter.title || `${slug}(Untitled)`;
           article.title = title;
 
           const date = new Date(article.frontmatter.date);
@@ -213,26 +219,37 @@ export class ArticleService {
       .process(content);
 
     const { ast, toc, article } = file.data as {
-      ast: Node;
+      ast: Root;
       toc: mdtoc.TOCResult;
       article: Article;
     };
+    const filteredAst = filter(
+      ast,
+      { cascade: false },
+      (node: unknown): node is Node => {
+        const currentNode = node as Node;
+        return currentNode.type !== "yaml" && currentNode.type !== "toml";
+      }
+    ) as TreeNode | undefined;
+
     article.nodes =
-      this.transformAST2JSON(
-        filter(ast, { cascade: false }, (node: any): node is Node => {
-          return node.type !== "yaml" && node.type !== "toml";
-        }) as Node
-      )?.children ?? [];
+      this.transformAST2JSON(filteredAst)?.children ?? [];
     article.toc = toc.map;
+
+    if (!article.frontmatter.title) {
+      const firstTocSection = (toc.map as TreeNode | undefined)?.children?.[0];
+      const firstTocNode = firstTocSection?.children?.[0];
+      article.title = this.toPureString(firstTocNode) || article.title;
+    }
 
     this.articles.set(article.slug, article);
     // this.collection.push(article)
   }
 
-  getArticleIntro(nodes: Content, maxLength: number) {
+  getArticleIntro(nodes: Content[], maxLength: number) {
     // TODO: 有待改进
     let str = "";
-    visit({ type: "root", children: nodes }, (node) => {
+    visit({ type: "root", children: nodes } as Root, (node: any) => {
       switch (node.type) {
         case "text": {
           if (str.length < maxLength) {
@@ -246,11 +263,11 @@ export class ArticleService {
     return str.slice(0, maxLength);
   }
 
-  toPureString(ast: Node) {
+  toPureString(ast: Node | undefined) {
     const strs: string[] = [];
 
     if (ast) {
-      visit(ast, (node) => {
+      visit(ast, (node: any) => {
         switch (node.type) {
           case "text": {
             strs.push(node.value as string);
@@ -263,23 +280,22 @@ export class ArticleService {
     return strs.join("");
   }
 
-  private transformAST2JSON(node: Node) {
+  private transformAST2JSON(node: TreeNode | undefined): SerializedTreeNode | undefined {
     if (!node) {
       return;
     }
     // delete position
     const { position, ...newNode } = node;
-    if (newNode.children) {
-      if (Array.isArray(newNode.children)) {
-        newNode.children = newNode.children.map((child) =>
-          this.transformAST2JSON(child)
+    const serializedNode = newNode as SerializedTreeNode;
+    if (Array.isArray(node.children)) {
+      serializedNode.children = node.children
+        .map((child) => this.transformAST2JSON(child))
+        .filter(
+          (child): child is SerializedTreeNode => child !== undefined
         );
-      } else {
-        newNode.children = this.transformAST2JSON(newNode.children as any);
-      }
     }
 
-    return newNode;
+    return serializedNode;
   }
 
   getAllArticles(): Article[] {

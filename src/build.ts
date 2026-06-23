@@ -21,23 +21,83 @@ const builder = new SanIBuilder({
   entryHTML: "index.html",
 });
 
+async function isBackendReady(port: number) {
+  try {
+    const res = await fetch(`http://localhost:${port}/graphql`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        query: "query { __typename }",
+      }),
+    });
+    return res.ok;
+  } catch {
+    return false;
+  }
+}
+
+async function waitBackendReady(port: number, timeoutMs: number) {
+  const start = Date.now();
+  while (Date.now() - start < timeoutMs) {
+    if (await isBackendReady(port)) {
+      return true;
+    }
+    await new Promise((resolve) => setTimeout(resolve, 200));
+  }
+  return false;
+}
+
 (async () => {
   let cp: ChildProcess | undefined;
   if (process.argv[2]) {
+    const port = Number(process.env.BUILD_SERVER_PORT ?? 3301);
+    process.env.GRAPHQL_BASE_URL = `http://localhost:${port}`;
+
     cp = spawn("node", process.argv.slice(2), {
       stdio: "pipe",
+      env: {
+        ...process.env,
+        PORT: `${port}`,
+      },
     });
+
     await new Promise((resolve, reject) => {
+      let isReady = false;
+
       cp!.stdout?.on("data", (data) => {
-        const line = String(data);
-        // console.log(line)
-        if (line.indexOf("Nest application successfully") !== -1) {
-          resolve(null);
+        process.stdout.write(String(data));
+      });
+
+      cp!.stderr?.on("data", (data) => {
+        process.stderr.write(String(data));
+      });
+
+      cp!.once("error", (error) => {
+        reject(error);
+      });
+
+      cp!.once("exit", (code, signal) => {
+        if (!isReady) {
+          reject(
+            new Error(
+              `backend server exited before ready: code=${code}, signal=${signal}`
+            )
+          );
         }
       });
-      cp!.on("error", (code) => {
-        reject(new Error(`${code}`));
-      });
+
+      waitBackendReady(port, 15000)
+        .then((ready) => {
+          if (!ready) {
+            reject(new Error("backend server is not ready within 15s"));
+            return;
+          }
+          isReady = true;
+          resolve(null);
+        })
+        .catch(reject);
     });
   }
   await builder.prepareFiles();

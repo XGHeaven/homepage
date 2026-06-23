@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "start": "vite",
-    "build": "npm run build:fe && npm run build:be && node ./dist/backend/build.js ./dist/backend/server.js",
+    "build": "pnpm run build:fe && pnpm run build:be && node ./dist/backend/build.js ./dist/backend/server.js",
     "build:fe": "vite build",
     "fmt": "prettier \"src/**/*.{ts,tsx,css}\" -w",
     "build:be": "tsc -p tsconfig.backend.json",
@@ -97,5 +97,5 @@
     "vite": "^5.2.11",
     "vite-plugin-babel-macros": "^1.0.6"
   },
-  "packageManager": "pnpm@8"
+  "packageManager": "pnpm@10.33.0"
 }

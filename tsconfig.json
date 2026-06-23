@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "moduleResolution": "node",
+    "ignoreDeprecations": "6.0",
     "target": "es6",
     "module": "ESNext",
     "jsx": "preserve",

@@ -2,7 +2,7 @@ import path from "path";
 import { Source, HeadChildren } from "../core";
 import * as fs from "fs-extra";
 import * as url from "url";
-import cheerio from "cheerio";
+import * as cheerio from "cheerio";
 import axios from "axios";
 import * as crypto from "crypto";
 
@@ -176,11 +176,11 @@ export class SanIBuilder {
 
   private async writePage(page: PageStore, mapper: Record<string, string>) {
     let html = await this.readEntryHTML();
-    const $ = cheerio.load(html, { decodeEntities: false });
+    const $ = cheerio.load(html);
     const $head = $("head");
     const { head = {}, sources, uri: targetPath } = page;
     if (head.title) {
-      let $title = $head.find("title");
+      let $title: cheerio.Cheerio<any> = $head.find("title");
       if (!$title.length) {
         $title = $("<title></title>");
         $head.append($title);
@@ -189,7 +189,7 @@ export class SanIBuilder {
     }
 
     if (head.description) {
-      let $desc = $head.find("description");
+      let $desc: cheerio.Cheerio<any> = $head.find("description");
       if (!$desc.length) {
         $desc = $(`<meta name="description" content="${head.description}">`);
         $head.append($desc);
