@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import path from "path";
-import glob from "glob";
+import { globSync } from "glob";
 import * as fs from "fs-extra";
 import remarkParser from "remark-parse";
 import remarkFrontmatter from "remark-frontmatter";
@@ -63,7 +63,7 @@ export class ArticleService {
   }
 
   async init(pattern: string) {
-    const files = glob.sync(pattern, {});
+    const files = globSync(pattern);
     await Promise.all(
       files.map((file) =>
         this.loadMarkdownFile(path.join(process.cwd(), file)).catch((e) => {

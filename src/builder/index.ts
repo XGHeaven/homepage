@@ -134,7 +134,6 @@ export class SanIBuilder {
     }
 
     await fs.copy(this.inputDir, this.outputDir, {
-      recursive: true,
       filter: (src, dest) => {
         console.log(src);
         if (src === this.entryHTML) {
